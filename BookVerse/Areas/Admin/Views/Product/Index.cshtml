@@ -1,0 +1,79 @@
+﻿
+
+@model List<Product>
+
+
+    <div class="container">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h3 class="text-info">Product List</h3>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+                  <i class="bi bi-plus-circle"></i>  Create New Product
+                </a>
+            </div>
+        </div>
+    </div>
+
+     
+<table class="table table-bordered table-striped table-info text-center">
+    <thead class="table-secondary">
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                ISBN
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider" >
+        @if(Model.Count>=1 && Model !=null)
+        {
+            
+        @foreach(var data in Model.OrderBy(u=>u.Title))
+        {
+        <tr>
+            <td>@data.Title</td>
+            <td>@data.Author</td>
+            <td>@data.ISBN</td>
+            <td>@data.ListPrice</td>
+            <td></td>
+            <td>
+                <div class="w-75 btn-group" role="group">
+                    <a asp-controller="Product" asp-action="Upsert" asp-route-Id="@data.Id" class="btn btn-primary mx-2">
+                            <i class="bi bi-pencil-square"></i>Edit
+                    </a>
+                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@data.Id" class="btn btn-primary mx-2">
+                            <i class="bi bi-trash3"></i>Delete
+                        </a>
+                </div>
+            </td>
+        </tr>
+            }
+        }
+        else
+        {
+            <td colspan="4">  
+                <div class="text-body-emphasis">
+
+                No Item available
+                </div>
+            </td>
+        }
+   </tbody>
+
+</table>
