@@ -27,6 +27,8 @@ namespace BookVerse.Models
         [Range(0,10000)]
         public double ListPrice { get; set; }
 
+
+        [ValidateNever]
         public string Image { get; set; }
 
         //foreignKey relation betweeen product and category

@@ -17,8 +17,8 @@
     </div>
 
      
-<table class="table table-bordered table-striped table-info text-center">
-    <thead class="table-secondary">
+<table class="table table-bordered table-striped table-hover text-center">
+    <thead class="table-info">
         <tr>
             <th>
                 Title
@@ -46,18 +46,18 @@
             
         @foreach(var data in Model.OrderBy(u=>u.Title))
         {
-        <tr>
+        <tr class="table-light">
             <td>@data.Title</td>
             <td>@data.Author</td>
             <td>@data.ISBN</td>
             <td>@data.ListPrice</td>
-            <td></td>
+            <td>@data.Category.Name</td>
             <td>
                 <div class="w-75 btn-group" role="group">
-                    <a asp-controller="Product" asp-action="Upsert" asp-route-Id="@data.Id" class="btn btn-primary mx-2">
+                    <a asp-controller="Product" asp-action="Upsert" asp-route-Id="@data.Id" class="btn btn-info mx-2">
                             <i class="bi bi-pencil-square"></i>Edit
                     </a>
-                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@data.Id" class="btn btn-primary mx-2">
+                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@data.Id" class="btn btn-danger mx-2">
                             <i class="bi bi-trash3"></i>Delete
                         </a>
                 </div>

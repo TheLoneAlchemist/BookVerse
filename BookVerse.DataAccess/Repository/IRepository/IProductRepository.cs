@@ -9,7 +9,7 @@ namespace BookVerse.DataAccess.Repository.IRepository
 {
     public interface IProductRepository: IRepository<Product>
     {
-        void Update(Product product);
+        void UpdateProduct(Product product);
         void Save();
     }
 }
