@@ -20,8 +20,8 @@
     </div>
 
      
-    <table class="table table-bordered table-striped table-info text-center">
-    <thead class="table-secondary">
+    <table class="table table-bordered table-striped table-hover text-center">
+    <thead class="table-success">
         <tr>
             <th>
                 Category List
@@ -43,16 +43,16 @@
             
         @foreach(var data in Model.OrderBy(u=>u.Name))
         {
-        <tr>
+        <tr class="table-light">
             <td>@data.Name</td>
             <td>@data.Description</td>
             <td>@data.DisplayOrder</td>
             <td>
                 <div class="w-75 btn-group" role="group">
-                    <a asp-controller="Category" asp-action="Edit" asp-route-Id="@data.Id" class="btn btn-primary mx-2">
+                    <a asp-controller="Category" asp-action="Edit" asp-route-Id="@data.Id" class="btn btn-info btn-sm mx-2">
                             <i class="bi bi-pencil-square"></i>Edit
                     </a>
-                        <a asp-controller="Category" asp-action="Delete" asp-route-id="@data.Id" class="btn btn-primary mx-2">
+                        <a asp-controller="Category" asp-action="Delete" asp-route-id="@data.Id" class="btn btn-danger btn-sm mx-2">
                             <i class="bi bi-trash3"></i>Delete
                         </a>
                 </div>

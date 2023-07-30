@@ -20,6 +20,7 @@ namespace BookVerse.DataAccess.Repository
         {
             _db = db;
             this.dbSet = _db.Set<T>();
+            _db.Products.Include(x => x.Category);
 
         }
 
@@ -29,16 +30,30 @@ namespace BookVerse.DataAccess.Repository
 
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public T Get(Expression<Func<T, bool>> filter,string? includeProperty= null)
         {
             IQueryable<T> query = dbSet;
-            query = query.Where(filter);
+            if (!string.IsNullOrEmpty(includeProperty))
+            {
+                foreach (var prop in includeProperty.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(prop);
+                }
+            }
+            query = query.Where(filter).AsNoTracking();
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includeProperty = null)
         {
             IQueryable<T> query = dbSet;
+            if(!string.IsNullOrEmpty(includeProperty))
+            {
+                foreach(var prop in includeProperty.Split(new char[] {','},StringSplitOptions.RemoveEmptyEntries ))
+                {
+                    query = query.Include(prop);
+                }
+            }
             return query.ToList();
         }
 
