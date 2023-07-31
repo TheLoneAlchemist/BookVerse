@@ -17,7 +17,7 @@
     </div>
 
      
-<table class="table table-bordered table-striped table-hover text-center">
+<table class="table table-bordered table-striped table-hover text-center" id="ProductTable">
     <thead class="table-info">
         <tr>
             <th>
@@ -40,7 +40,11 @@
             </th>
         </tr>
     </thead>
+
     <tbody class="table-group-divider" >
+
+        @*
+
         @if(Model.Count>=1 && Model !=null)
         {
             
@@ -67,13 +71,31 @@
         }
         else
         {
-            <td colspan="4">  
-                <div class="text-body-emphasis">
+            <tr>
 
-                No Item available
-                </div>
-            </td>
+                <td colspan="4">  
+                    <div class="text-body-emphasis">
+
+                    No Item available
+                    </div>
+                </td>
+           </tr>
         }
+        *@
+
+
+
    </tbody>
 
+
 </table>
+
+
+
+<link href="~/lib/datatables/css/jquery.datatables.css" rel="stylesheet" />
+<link href="~/lib/datatables/css/jquery.datatables.min.css" rel="stylesheet" />
+@section Scripts{
+    <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+    <script src="~/js/getproduct.js"></script>
+}

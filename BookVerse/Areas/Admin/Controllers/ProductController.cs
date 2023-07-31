@@ -27,15 +27,7 @@ namespace BookVerse.Areas.Admin.Controllers
             return View();
         }
 
-        #region API
-        [HttpGet]
-        public JsonResult GetProductData()
-        {
-            List<Product> products = _context.GetAll(includeProperty: "Category").ToList();
-            return Json(new JsonResult(products));
-        }
 
-        #endregion
 
         //Create Page
         public IActionResult Upsert(int? id)
@@ -64,6 +56,9 @@ namespace BookVerse.Areas.Admin.Controllers
             }
         }
 
+
+
+        //Validatating Product
         [NonAction]
         public void ValidateProduct(ProductVM productvm,int UpdateOrInsert)
         {
@@ -85,7 +80,7 @@ namespace BookVerse.Areas.Admin.Controllers
 		}
 
 
-		//Creating Product
+		//Create Product and Update
 		[HttpPost]
         public IActionResult Upsert(ProductVM productvm, IFormFile? productimg)
         {
@@ -112,7 +107,9 @@ namespace BookVerse.Areas.Admin.Controllers
                     if(!string.IsNullOrEmpty(productvm.Product.Image)) /// checking that image is update or not by checking the productvm 
                     {
                         string oldimage = Path.Combine(wwwrootpath,productvm.Product.Image.TrimStart('\\'));
-                        if (System.IO.File.Exists(oldimage) && oldimage.Equals(Path.Combine(wwwrootpath, @"\images\product\DefaultImage\DefaultProduct.png")))
+                        var defaultimage = Path.Combine(_webHostEnvironment.WebRootPath, @"images\product\DefaultImage\DefaultProduct.png");
+
+                        if (System.IO.File.Exists(oldimage) && (oldimage != defaultimage))
                         {
                             System.IO.File.Delete(oldimage);
                         }
@@ -154,7 +151,7 @@ namespace BookVerse.Areas.Admin.Controllers
 
         }
 
-
+        // As We are merging the create and Insert method as upsert we don't need it
         /*
 
                 //Edit Product
@@ -234,11 +231,98 @@ namespace BookVerse.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            // removing the product image if exist
+            var Image = Path.Combine(_webHostEnvironment.WebRootPath, p.Image.TrimStart('\\'));
+            var defaultimage = Path.Combine(_webHostEnvironment.WebRootPath, @"images\product\DefaultImage\DefaultProduct.png");
+
+            if (System.IO.File.Exists(Image) && (Image != defaultimage))
+            {
+                System.IO.File.Delete(Image);
+            }
             _context.Remove(p);
             _context.Save();
             TempData["success"] = $"Product [{p.Title}] deleted successfully!";
 
             return RedirectToAction("Index");
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #region API
+
+
+        // Get Product data API
+        [HttpGet]
+        public IActionResult GetProductData()
+        {
+            List<Product> products = _context.GetAll(includeProperty: "Category").ToList();
+            //return Json(new JsonResult(products));
+            Thread.Sleep(2000);
+            return new JsonResult(products);
+        }
+
+        // Delete Data API
+        [HttpDelete]
+        public IActionResult DeleteProductAPI(int? id)
+        {
+            var getproduct = _context.Get(x => x.Id == id);
+            if(getproduct == null)
+            {
+                var msg = Json(new { success = false, message = "The Product you are trying to delete does not exist!" });
+
+                return msg;
+            }
+            try
+            {
+                // removing the product image if exist
+                var Image = Path.Combine(_webHostEnvironment.WebRootPath,getproduct.Image.TrimStart('\\'));
+                var defaultimage = Path.Combine(_webHostEnvironment.WebRootPath, @"images\product\DefaultImage\DefaultProduct.png");
+                    
+                if (System.IO.File.Exists(Image)  && (Image != defaultimage))
+                     {
+                        System.IO.File.Delete(Image);
+                     }
+            }
+            catch (Exception e)
+            {
+                ErrorLogMaintainance(e.Message);
+
+            }
+            finally
+            {
+                _context.Remove(getproduct);
+                _context.Save();
+            }
+
+            return new JsonResult(new {success = true, message="Successfuly Deleted!"});
+        }
+        #endregion
+
+
+
+
+        #region Utility
+        [NonAction]
+        public void ErrorLogMaintainance(string message)
+        {
+            var errorlogpath = Path.Combine(_webHostEnvironment.WebRootPath, @"\Log");
+            System.IO.File.AppendAllText(errorlogpath, message);
+
+        }
+        #endregion
+
+
+
     }
 }

@@ -20,4 +20,8 @@
     <ProjectReference Include="..\BookVerse.DataAccess\BookVerse.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Log\" />
+  </ItemGroup>
+
 </Project>
