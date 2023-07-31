@@ -1,4 +1,5 @@
-﻿using BookVerse.Models;
+﻿using BookVerse.DataAccess.Repository.IRepository;
+using BookVerse.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,15 +9,26 @@ namespace BookVerse.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProductRepository _productcontext;
+        public HomeController(ILogger<HomeController> logger, IProductRepository productRepository)
         {
             _logger = logger;
+            _productcontext = productRepository;
         }
+
+
 
         public IActionResult Index()
         {
-            return View();
+            var Products = _productcontext.GetAll(includeProperty: "Category");
+            return View(Products);
+        }
+
+        public IActionResult ProductDetails(int id)
+        {
+
+            var Product = _productcontext.Get(g => g.Id==id,includeProperty:"Category");
+            return View(Product);
         }
 
         public IActionResult Privacy()
