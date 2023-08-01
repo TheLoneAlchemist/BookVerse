@@ -22,9 +22,8 @@
 						<span asp-validation-for="Product.Title" class="text-danger"></span>
 					</div>
 					<div class="mb-3 row">
-						<label asp-for="Product.Description" class="p-0"></label>
+						<label asp-for="Product.Description" class="p-0 text-muted"></label>
 						<textarea asp-for="Product.Description" class="form-control"></textarea>
-						<span asp-validation-for="Product.Description" class="text-danger"></span>
 					</div>
 					<div class="mb-3 row">
 						<label class="p-0" asp-for="Product.Author"></label>
@@ -86,6 +85,8 @@
 
 
 @section Scripts{
+    <script src="~/js/product/upsert.js"></script>
+
 	@{
 	<partial name="_ValidationScriptsPartial"/>
 	}

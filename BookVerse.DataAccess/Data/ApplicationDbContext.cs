@@ -1,9 +1,11 @@
 ﻿using BookVerse.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookVerse.DataAccess.Data
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext>options):base(options)
         {
@@ -15,6 +17,8 @@ namespace BookVerse.DataAccess.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
 
             //data seeding for category table
             modelBuilder.Entity<Category>().HasData(

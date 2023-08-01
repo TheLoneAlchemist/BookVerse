@@ -2,14 +2,18 @@ using BookVerse.DataAccess.Data;
 using BookVerse.DataAccess.Repository;
 using BookVerse.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<BookVerse.DataAccess.Data.ApplicationDbContext>(options=>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConection")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -28,7 +32,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication(); 
 app.UseAuthorization();
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",

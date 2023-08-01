@@ -23,7 +23,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -46,9 +46,10 @@
                                 <li><hr class="dropdown-divider"></li>
                         
                         </ul>
-        </li>
+                             
 
                     </ul>
+                    <partial name="_LoginPartial"/>
                 </div>
             </div>
         </nav>
@@ -70,6 +71,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.tiny.cloud/1/ui11oppvghoiytlm18o8q68dz07b814ktn7y2jrmoo4p8s0q/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
