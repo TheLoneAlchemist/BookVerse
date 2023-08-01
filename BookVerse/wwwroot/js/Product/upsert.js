@@ -1,4 +1,5 @@
 
+//For Html Text Editor
     tinymce.init({
         selector: 'textarea',
         plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons lists searchreplace  table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode  tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
