@@ -11,7 +11,10 @@ namespace BookVerse.Models
     public class ApplicationUser:IdentityUser
     {
         [Required]
-        public string Name { get; set; }
+        [PersonalData]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
         
         public string? Street { get; set; }
         public string? City { get; set; }
