@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BookVerse.Uitility
 {
-    internal class STATICDETAIL
+    public enum AppRole
     {
+        User,
+        Moderator,
+        Admin
     }
 }

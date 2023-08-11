@@ -52,7 +52,7 @@ namespace BookVerse.DataAccess.Data
                         CategoryId = 1,
                         Image = ""
                     }
-                );;
+                );
         }
     }
 }

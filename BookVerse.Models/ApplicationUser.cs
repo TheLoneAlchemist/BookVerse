@@ -14,9 +14,13 @@ namespace BookVerse.Models
         [PersonalData]
         public string FirstName { get; set; }
         [Required]
+        [PersonalData]
         public string LastName { get; set; }
-        
+        [PersonalData]
+        public string Mobile { get; set; }
+        [PersonalData]
         public string? Street { get; set; }
+        [PersonalData]
         public string? City { get; set; }
         public string? State { get; set; }
         public string? ZipCode { get; set;}
