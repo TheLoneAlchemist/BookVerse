@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
@@ -102,18 +103,30 @@ namespace BookVerse.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+
+            public string Role { set; get; }
+
+            public IEnumerable<SelectListItem> RoleList { get; set; }
+
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (!await _roleManager.RoleExistsAsync(AppRole.User.ToString()))
+            if (!await _roleManager.RoleExistsAsync(AppRole.Admin.ToString()))
             {
                await _roleManager.CreateAsync(new IdentityRole(AppRole.User.ToString()));
                await _roleManager.CreateAsync(new IdentityRole(AppRole.Moderator.ToString()));
-               await _roleManager.CreateAsync(new IdentityRole(AppRole.User.ToString()));
+               await _roleManager.CreateAsync(new IdentityRole(AppRole.Admin.ToString()));
             }
 
+            //passing the role list
+            Input = new()
+            {
+                RoleList = _roleManager.Roles.Select(l => l.Name).Select(p => new SelectListItem { Text = p, Value = p })
+            };
+             
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
