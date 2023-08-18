@@ -2,12 +2,14 @@
 using BookVerse.DataAccess.Repository.IRepository;
 using BookVerse.Models;
 using BookVerse.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookVerse.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class ProductController : Controller
     {
         private readonly IProductRepository _context;

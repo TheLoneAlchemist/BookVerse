@@ -1,11 +1,13 @@
 ﻿using BookVerse.DataAccess.Data;
 using BookVerse.DataAccess.Repository.IRepository;
 using BookVerse.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookVerse.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles= "Admin,Moderator")]
     public class CategoryController : Controller
     {
         private readonly ICategoryRepository _context;
