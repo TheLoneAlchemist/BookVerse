@@ -109,6 +109,17 @@ namespace BookVerse.Areas.Identity.Pages.Account
 
             public IEnumerable<SelectListItem> RoleList { get; set; }
 
+            [Required]
+            [Display(Name ="First Name")]
+            [StringLength(100,ErrorMessage ="First Name Can not Exceed 100 char",MinimumLength=3)]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name ="Last Name")]
+            [StringLength(100,ErrorMessage ="Last Name Can not Exceed 100 char",MinimumLength=3)]
+            public string LastName { get; set; }
+
+
         }
 
 
@@ -141,6 +152,8 @@ namespace BookVerse.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

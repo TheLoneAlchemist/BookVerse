@@ -13,10 +13,23 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 // Manual Service Added Here
-builder.Services.AddDbContext<BookVerse.DataAccess.Data.ApplicationDbContext>(options=>
+builder.Services.AddDbContext<ApplicationDbContext>(options=>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConection")));
 
 builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+
+//Overriding the default url config of identity
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.LoginPath = $"/Identity/Account/Login";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+    
+});
+
+
+//Repositories
 
 builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
