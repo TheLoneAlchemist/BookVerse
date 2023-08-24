@@ -12,13 +12,8 @@ namespace BookVerse.Models
     {
         [Key]
         public int Id { get; set; }
-
-        public int ProductId { get; set; }
-        [ForeignKey("Product")]
-        public Product Product { get; set; }
-
-        public int UserId { get; set; }
-        [ForeignKey("ApplicationUser")]
-        public ApplicationUser User { get; set; }
+        public ICollection<BasketItem> Items { get; set; }
+        public string UserId { get; set; }
+        public double CartPrice { get; set; }
     }
 }

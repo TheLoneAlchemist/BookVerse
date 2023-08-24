@@ -19,5 +19,19 @@ namespace BookVerse.Areas.Customer.Controllers
         {
             return View();
         }
+
+
+
+
+        #region APIs Region
+
+        public async Task<IActionResult> AddToCart(int productid, int quantity)
+        {
+                await  _cartRepository.AddItemsToCart(productid, quantity);
+            var cartitems = _cartRepository.GetAll().ToList();
+            return new JsonResult(cartitems);
+        }
+
+        #endregion
     }
 }

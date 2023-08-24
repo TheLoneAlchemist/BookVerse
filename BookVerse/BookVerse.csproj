@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Data\" />
-    <Folder Include="wwwroot\js\Product\" />
+    <Folder Include="wwwroot\js\Cart\" />
     <Folder Include="wwwroot\Log\" />
   </ItemGroup>
 

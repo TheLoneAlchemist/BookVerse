@@ -4,6 +4,7 @@ using BookVerse.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookVerse.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230824062325_CartAndItemToDb3")]
+    partial class CartAndItemToDb3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,12 +36,6 @@ namespace BookVerse.DataAccess.Migrations
                     b.Property<DateTime>("AddedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("NetPrice")
-                        .HasColumnType("float");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -49,8 +46,6 @@ namespace BookVerse.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CartId");
 
                     b.HasIndex("ProductId");
 
@@ -65,14 +60,16 @@ namespace BookVerse.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("CartPrice")
-                        .HasColumnType("float");
+                    b.Property<string>("ApplicationUser")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUser");
 
                     b.ToTable("Carts");
                 });
@@ -429,10 +426,6 @@ namespace BookVerse.DataAccess.Migrations
 
             modelBuilder.Entity("BookVerse.Models.BasketItem", b =>
                 {
-                    b.HasOne("BookVerse.Models.Cart", null)
-                        .WithMany("Items")
-                        .HasForeignKey("CartId");
-
                     b.HasOne("BookVerse.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -440,6 +433,15 @@ namespace BookVerse.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("BookVerse.Models.Cart", b =>
+                {
+                    b.HasOne("BookVerse.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUser");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BookVerse.Models.Product", b =>
@@ -502,11 +504,6 @@ namespace BookVerse.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BookVerse.Models.Cart", b =>
-                {
-                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

@@ -68,13 +68,14 @@
                             <p class="tag-section"><strong>Author : </strong>@Model.Author</p>
                         </div>
                         <div class="col-lg-12">
+                            <input hidden value="@Model.Id" id="productid" />
                             <h6>Quantity :</h6>
-                            <input type="number" class="form-control text-center w-100" value="1">
+                            <input type="number" class="form-control text-center w-100" value="1" id="quantity">
                         </div>
                         <div class="col-lg-12 mt-3">
                             <div class="row">
                                 <div class="col-lg-6 pb-2">
-                                    <a href="#" class="btn btn-danger w-100">Add To Cart</a>
+                                    <button id="addtocart" class="btn btn-danger w-100">Add To Cart</button>
                                 </div>
                                 <div class="col-lg-6">
                                     <a href="#" class="btn btn-success w-100">Buy Now</a>
@@ -115,3 +116,7 @@
     </div>
 </div>
 
+@section Scripts{
+
+    <script src="~/js/Cart/cart.js"></script>
+}

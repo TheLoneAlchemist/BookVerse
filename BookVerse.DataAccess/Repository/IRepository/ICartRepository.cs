@@ -10,5 +10,6 @@ namespace BookVerse.DataAccess.Repository.IRepository
     {
         void UpdateCart(Cart cartitem);
         void SaveCart();
+        public  Task AddItemsToCart(int productid, int quantity);
     }
 }
