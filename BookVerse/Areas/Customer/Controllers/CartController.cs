@@ -1,5 +1,7 @@
 ﻿using BookVerse.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
+using BookVerse.Models.ViewModels;
+
 
 namespace BookVerse.Areas.Customer.Controllers
 {
@@ -25,11 +27,14 @@ namespace BookVerse.Areas.Customer.Controllers
 
         #region APIs Region
 
-        public async Task<IActionResult> AddToCart(int productid, int quantity)
+        [HttpPost]
+        public async Task<IActionResult> AddToCart( int quantity, int productid)
         {
-                await  _cartRepository.AddItemsToCart(productid, quantity);
-            var cartitems = _cartRepository.GetAll().ToList();
-            return new JsonResult(cartitems);
+
+             _cartRepository.AddItemToCart( quantity, productid);
+
+
+            return new JsonResult("Done");
         }
 
         #endregion

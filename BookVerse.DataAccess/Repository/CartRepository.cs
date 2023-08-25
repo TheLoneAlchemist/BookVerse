@@ -1,6 +1,7 @@
 ﻿using BookVerse.DataAccess.Data;
 using BookVerse.DataAccess.Repository.IRepository;
 using BookVerse.Models;
+using BookVerse.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +39,7 @@ namespace BookVerse.DataAccess.Repository
 
 
         //Item will be added here...
-        public async Task AddItemsToCart( int productid, int quantity)
+        public async Task<int> AddItemToCart( int productid, int quantity)
         {
             var userId = GetUserId();
 
@@ -47,26 +48,55 @@ namespace BookVerse.DataAccess.Repository
                 throw new Exception("User is null");
             }
 
-            var cart = await GetUserCart(userId);
+           
+
+            Cart? cart = await GetUserCart(userId);
+
             if (cart is null)
             {
-                await _dbContext.Carts.AddAsync(new Cart() { UserId = userId });
-                await _dbContext.SaveChangesAsync();
+               await _dbContext.Carts.AddAsync(new Cart() { UserId = userId });
+               await _dbContext.SaveChangesAsync();
             }
 
-            var product = await _dbContext.Products.Where(m => m.Id == productid).FirstOrDefaultAsync();
-            var item = await _dbContext.BasketItems.AddAsync(new BasketItem() { Product = product, AddedOn = DateTime.Now,Status=true, Quantity=quantity});
-            await _dbContext.SaveChangesAsync();
-
             cart = await GetUserCart(userId);
-            
-            
+
+            if (productid != null)
+            {
+                var product = await _dbContext.Products.Where(p => p.Id == productid).FirstOrDefaultAsync();
+               _dbContext.BasketItems.Add(new BasketItem() { Product = product, AddedOn = DateTime.Now, Quantity = quantity, Cart = cart, NetPrice = product.ListPrice * quantity, Status = true });
+               await _dbContext.SaveChangesAsync();
+
+
+                var item = _dbContext.BasketItems.Where(x => x.Cart == cart).FirstOrDefault();
+
+
+
+                var newcart = new Cart()
+                {
+                    Id = cart.Id,
+                    CartPrice = cart.CartPrice + item.NetPrice,
+                    ItemCount = cart.ItemCount + 1,
+                    UserId = userId
+                };
+
+                
+
+                _dbContext.Carts.Update(newcart);
+            }
+
+
+
+            return cart.ItemCount;
+
+
+
+
         }
 
 
         #region Utility
 
-        private  string GetUserId()
+        public  string GetUserId()
         {
             var claimsprincipal = _httpContextAccessor.HttpContext.User;
             var userId = _userManager.GetUserId(claimsprincipal);
@@ -74,11 +104,13 @@ namespace BookVerse.DataAccess.Repository
 
         }
 
-        private async Task<Cart?> GetUserCart(string userId)
+        public async Task<Cart?> GetUserCart(string userId)
         {
-            var cart = await _dbContext.Carts.Where(x => x.UserId == userId).FirstOrDefaultAsync();
+            var cart = await _dbContext.Carts.Where(x => x.UserId == userId).Include("Items").FirstOrDefaultAsync();
             return cart;
         }
+
+
 
 
         #endregion

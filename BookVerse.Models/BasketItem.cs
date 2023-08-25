@@ -18,6 +18,8 @@ namespace BookVerse.Models
         public  DateTime AddedOn { get; set; }
 
         public double NetPrice { get; set; }
-        public bool Status { get; set; } = false;
+        public bool Status { get; set; } 
+
+        public Cart Cart { get; set; }
     }
 }
