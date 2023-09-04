@@ -1,0 +1,54 @@
+﻿
+@model IEnumerable<MyOrderVM>;
+
+
+
+    <div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                ProductId
+            </th>
+            <th>Name</th>
+            <th>Item Price</th>
+            <th>Quantity</th>
+            <th>Net Price</th>
+            <th>Delivery Status</th>
+            <th>Track Order</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.OrderId
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>@item.Price</td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @item.NetPrice
+                        </td>
+                        <td>
+                            @item.DeliveryStatus
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-outline-info" >Track</a>
+                        </td>
+                    </tr>
+                }
+            }
+    </tbody>
+
+</table>
+
+    </div>

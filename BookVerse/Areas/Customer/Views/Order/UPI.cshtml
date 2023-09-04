@@ -1,0 +1,17 @@
+﻿<h2>UPI</h2>
+
+
+
+<h2>credit card </h2>
+
+<form asp-action="PaymentConfirm">
+    <div>
+        <label for="UPIID" class="form-label">UPI</label>
+        <input type="number" class="form-control" id="UPIID" />
+
+    </div>
+
+    <input type="number" name="checkoutId" value="@ViewData["checkoutID"]" hidden />
+    <input type="text" class="form-control" value="UPI" name="PaymentOption" hidden />
+    <input type="submit" value="PayNow" />
+</form>

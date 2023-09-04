@@ -17,6 +17,13 @@ namespace BookVerse.DataAccess.Data
         public DbSet<BasketItem> BasketItems { get; set; }
        public DbSet<Cart> Carts { get; set; }
 
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Checkout> Checkouts { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderedItem> OrderedItems { get; set; }
+
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

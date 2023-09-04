@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using BookVerse.Uitility.Services;
+using BookVerse.DataAccess.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +39,8 @@ builder.Services.AddScoped<ICartRepository, CartRepository>();
 //Email Service
 builder.Services.AddScoped<IEmailSender, EmailService>();
 
+//helper Service
+builder.Services.AddScoped<IHelper, Helper>();
 
 var app = builder.Build();
 

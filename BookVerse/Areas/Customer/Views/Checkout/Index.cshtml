@@ -1,0 +1,89 @@
+﻿@model CheckoutVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h4>Checkout</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Checkout.FirstName" class="form-label"></label>
+                <input asp-for="Checkout.FirstName" class="form-control" />
+                <span asp-validation-for="Checkout" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Checkout.LastName" class="form-label"></label>
+                <input asp-for="Checkout.LastName" class="form-control" />
+                <span asp-validation-for="Checkout.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Checkout.Phone" class="form-label"></label>
+                <input asp-for="Checkout.Phone" class="form-control" />
+                <span asp-validation-for="Checkout.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.Street" class="form-label"></label>
+                <input asp-for="Address.Street" class="form-control" />
+                <span asp-validation-for="Address.Street" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.City" class="form-label"></label>
+                <input asp-for="Address.City" class="form-control" />
+                <span asp-validation-for="Address.City" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.State" class="form-label"></label>
+                <input asp-for="Address.State" class="form-control" />
+                <span asp-validation-for="Address.State" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address.Country" class="form-label"></label>
+                <input asp-for="Address.Country" class="form-control" />
+                <span asp-validation-for="Address.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.ZipCode" class="form-label"></label>
+                <input asp-for="Address.ZipCode" class="form-control" />
+                <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Checkout.ShippingPrice" class="form-label"></label>
+                <input asp-for="Checkout.ShippingPrice" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="Checkout.CouponDiscount" class="form-label"></label>
+                <input asp-for="Checkout.CouponDiscount" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="Checkout.TotalPrice" class="form-label"></label>
+                <input asp-for="Checkout.TotalPrice" class="form-control" readonly />
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

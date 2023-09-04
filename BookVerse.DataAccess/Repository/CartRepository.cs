@@ -63,7 +63,7 @@ namespace BookVerse.DataAccess.Repository
             if (productid != null)
             {
                 var product = await _dbContext.Products.Where(p => p.Id == productid).FirstOrDefaultAsync();
-               _dbContext.BasketItems.Add(new BasketItem() { Product = product, AddedOn = DateTime.Now, Quantity = quantity, Cart = cart, NetPrice = product.ListPrice * quantity, Status = true });
+               _dbContext.BasketItems.Add(new BasketItem() { Product = product,  Quantity = quantity, Cart = cart, NetPrice = product.ListPrice * quantity, OrderStatus = true });
                await _dbContext.SaveChangesAsync();
 
 

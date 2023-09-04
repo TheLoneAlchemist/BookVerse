@@ -1,0 +1,29 @@
+﻿<h2>DebitCard Payment</h2>
+
+
+<form asp-action="PaymentConfirm">
+    <div>
+        <label for="CardID" class="form-label">Card Number</label>
+        <input type="number" class="form-control" id="CardID" />
+
+    </div>
+    <div>
+
+        <label for="Month" class="form-label">Month</label>
+        <input type="number" class="form-control" id="Month" />
+    </div>
+    <div>
+
+        <label for="Year" class="form-label">Year</label>
+        <input type="number" class="form-control" id="Year" />
+    </div>
+    <div>
+
+        <label for="CVV" class="form-label">CVV</label>
+        <input type="number" class="form-control" id="CVV" />
+    </div>
+
+    <input type="number" name="checkoutId" value="@ViewData["checkoutID"]" hidden />
+    <input type="text" class="form-control" value="Debitcard" name="PaymentOption" hidden />
+    <input type="submit" value="PayNow" />
+</form>

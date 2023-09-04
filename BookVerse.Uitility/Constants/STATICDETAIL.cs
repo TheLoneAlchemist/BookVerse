@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookVerse.Uitility
+namespace BookVerse.Uitility.Constants
 {
     public enum AppRole
     {

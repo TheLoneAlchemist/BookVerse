@@ -4,7 +4,76 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    .c-item {
+        height: 480px;
+    }
 
+    .c-img {
+        height: 100%;
+        object-fit:fill;
+        filter: brightness(0.6);
+    }
+</style>
+
+
+
+<div class="container">
+
+
+    <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true"
+                    aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="carousel-inner">
+            @if(Model != null)
+            {
+                
+            <div class="carousel-item active c-item">
+                <a asp-action="ProductDetails" asp-route-id="@Model.FirstOrDefault().Id">
+                        <img src="@Model.FirstOrDefault().Image" class="d-block w-100 c-img" alt="Slide 1">
+                <div class="carousel-caption top-0 mt-4">
+                    <p class="mt-5 fs-3 text-uppercase">@Model.FirstOrDefault().Author Presents</p>
+                    <h1 class="display-1 fw-bolder text-capitalize">The Aurora Tours</h1>
+                    
+                </div>
+                </a>
+            </div>
+            }
+        @foreach(var product in Model.Skip(1).Take(2))
+        
+        {
+            <div class="carousel-item c-item">
+              <a asp-action="ProductDetails" asp-route-id="@product.Id">
+                <img src="@product.Image"class="d-block w-100 c-img" alt="Slide 1">
+                <div class="carousel-caption top-0 mt-4">
+                    <p class="mt-5 fs-3 text-uppercase">@product.Author Presents </p>
+                    <h1 class="display-1 fw-bolder text-capitalize">@product.Title</h1>
+                    
+                </div>
+            </a>
+            </div>
+        }
+        
+        </div>
+            
+        <button class="carousel-control-prev text-dark p-1" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+            <span class="bi bi-caret-left-square-fill" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next text-dark p-1" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+            <span class="bi bi-caret-right-square-fill" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+</div>
+
+<div class="container-fluid m-4">
 <div class="row pb-3">
     @foreach (var product in Model)
     {
@@ -29,23 +98,13 @@
                             <div class="pl-1">
                                 <p class="text-dark text-opacity-75 text-center">
                                     As low as:
-                                    
-                                    @{
-                                        var discountprice = product.ListPrice - 2;
-                                        if(discountprice > 0)
-                                        {
-                                            <span>
-                                            @discountprice.ToString("c")
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <span>
-                                            @product.ListPrice
-                                            </span>
-                                        }
-                                    }
-                                    
+
+
+                                    <span>
+                                        @product.Price.ToString("c")
+                                    </span>
+
+
                                 </p>
                             </div>
                         </div>
@@ -61,4 +120,5 @@
             </div>
         </div>
     }
+</div>
 </div>

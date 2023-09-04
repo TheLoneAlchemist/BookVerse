@@ -3,11 +3,11 @@
 
 
 
-<div class="container">
+<div class="container d-flex align-items-center justify-content-center h-100">
     <div class="col-lg-8 border p-3 main-section bg-white">
         <div class="row hedding m-0 pl-3 pt-0 pb-3">
             <div class="col-10">
-
+                Category: 
             @Model.Category.Name
             </div>
             <div class="col">
@@ -68,6 +68,9 @@
                             <p class="tag-section"><strong>Author : </strong>@Model.Author</p>
                         </div>
                         <div class="col-lg-12">
+                            <p>Catgory: @Model.Author</p>
+                        </div>
+                        <div class="col-lg-12">
                             <input hidden value="@Model.Id" id="productid" />
                             <h6>Quantity :</h6>
                             <input type="number" class="form-control text-center w-100" value="1" id="quantity">
@@ -75,6 +78,7 @@
                         <div class="col-lg-12 mt-3">
                             <div class="row">
                                 <div class="col-lg-6 pb-2">
+                                    <input hidden value="@Model.Id" id="productId" />
                                     <button id="addtocart" class="btn btn-danger w-100">Add To Cart</button>
                                 </div>
                                 <div class="col-lg-6">
@@ -86,6 +90,9 @@
                 </div>
             </div>
         </div>
+
+
+
         <div class="row">
             <div class="col-lg-12 text-center pt-3">
                 <h4>More Product</h4>

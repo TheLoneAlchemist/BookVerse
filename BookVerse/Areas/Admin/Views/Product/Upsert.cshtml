@@ -41,6 +41,11 @@
 						<span asp-validation-for="Product.ListPrice" class="text-danger"></span>
 					</div>
 					<div class="mb-3 row">
+						<label class="p-0" asp-for="Product.Price"></label>
+						<input asp-for="Product.Price" class="form-control" />
+						<span asp-validation-for="Product.Price" class="text-danger"></span>
+					</div>
+					<div class="mb-3 row">
 						<select class="p-0 form-select" asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList">
 							<option disabled selected>--Select Category</option>
 						</select>

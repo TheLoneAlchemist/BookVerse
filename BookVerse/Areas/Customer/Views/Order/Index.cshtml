@@ -1,0 +1,30 @@
+﻿@model OrderVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<div>
+   <form asp-action="PaymentOptions">
+
+       <div class="form-control">
+           
+       <label asp-for="PaymentOption"></label>
+            <div class="col-md-10">
+                @foreach (var item in Model.PaymentOption)
+            {
+                    <input asp-for="PaymentOption" type="radio" value="@item" /> @item
+            }
+            </div>
+       </div>
+       <div>
+           <input asp-for="CheckoutId" hidden />
+           <label asp-for="TotalPrice" ></label>
+           <input readonly asp-for="TotalPrice" value="@Model.TotalPrice" />
+       </div>
+       <input type="submit" value="Confirm Order" />
+   </form>
+</div>

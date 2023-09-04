@@ -52,7 +52,8 @@ function LoadProduct()
             {data: 'title',"width":"15%"},
             { data: 'author',"width":"15%"},
             { data: 'isbn',"width":"10%"},
-            { data: 'listPrice',"width":"15%"},
+            { data: 'listPrice',"width":"10%"},
+            { data: 'price',"width":"10%"},
             { data: 'category.name', "width": "15%" },
             {
                 data: 'id',

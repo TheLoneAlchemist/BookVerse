@@ -1,65 +1,51 @@
 ﻿
+@model CartVM
 
 
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>List Price</th>
+            <th>Product Price</th>
+            <th>Quantity</th>
+            <th>Net Price</th>
+            <th>Remove</th>
+        </tr>
 
+    </thead>
+    <tbody>
+        @if (Model is null)
+        {
+            <tr>
+                <td>No Item Available</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model.BasketItems)
+            {
+                <tr>
+                    <td>@item.Product.Title</td>
+                    <td>
+                        <span class="text-decoration-line-through">
+                            @item.Product.ListPrice
+                        </span>
+                    </td>
+                    <td>@item.Product.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.NetPrice</td>
+                    <td><a asp-action="Remove" asp-controller="Cart" class="btn btn-outline-danger" asp-route-itemid=@item.Id>Remove</a></td>
+                </tr>
+            }
+        }
 
-
-<section class="h-100 h-custom">
-    <div class="container h-100 py-5">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col">
-
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="h5">Shopping Bag</th>
-                                <th scope="col">Format</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <div class="d-flex align-items-center">
-                                        <img src="https://i.imgur.com/2DsA49b.webp" class="img-fluid rounded-3"
-                                             style="width: 120px;" alt="Book">
-                                        <div class="flex-column ms-4">
-                                            <p class="mb-2">Thinking, Fast and Slow</p>
-                                            <p class="mb-0">Daniel Kahneman</p>
-                                        </div>
-                                    </div>
-                                </th>
-                                <td class="align-middle">
-                                    <p class="mb-0" style="font-weight: 500;">Digital</p>
-                                </td>
-                                <td class="align-middle">
-                                    <div class="d-flex flex-row">
-                                        <button class="btn btn-link px-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-
-                                        <input id="form1" min="0" name="quantity" value="2" type="number"
-                                               class="form-control form-control-sm" style="width: 50px;" />
-
-                                        <button class="btn btn-link px-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <p class="mb-0" style="font-weight: 500;">$9.99</p>
-                                </td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">Total Items = @Model.Cart.ItemCount</td>
+            <td>Grand Total = @Model.Cart.GrandTotalPrice</td>
+            <td><a asp-controller="Checkout" asp-action="Index" class="btn btn-outline-info">Checkout</a>  </td>
+        </tr>
+    </tfoot>
+</table>
