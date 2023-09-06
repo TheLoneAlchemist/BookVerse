@@ -54,13 +54,13 @@ namespace BookVerse.Areas.Customer.Controllers
 
 
 
-    
+        
 
 
 
         //Add Item to Cart
         [HttpPost]
-        public async Task<IActionResult> AddToCart(int productid, int quantity)
+        public async Task<IActionResult> AddToCart(int productid, int quantity, bool directbuy=false)
         {
 
             var userid = _helper.GetUserId();
@@ -75,11 +75,10 @@ namespace BookVerse.Areas.Customer.Controllers
             var cart = await _helper.GetCart(userid);
 
             var product = _context.Products.Where(p => p.Id == productid).FirstOrDefault();
-            //if cart is not created for that
+            //if cart is not created for that user
 
             if (cart is null)
             {
-
                 cart = new Cart();
                 cart.ItemCount = 1;
                 cart.UserId = userid;
@@ -96,9 +95,7 @@ namespace BookVerse.Areas.Customer.Controllers
             }
             else
             {
-
-
-
+                // if cart is exist for the user
                 Cart cart2 = new Cart();
                 cart2.BasketItems = new List<BasketItem>();
 
@@ -115,7 +112,6 @@ namespace BookVerse.Areas.Customer.Controllers
                         cart2.GrandTotalPrice += newitem.Product.Price * quantity;
 
                     }
-
                     else
                     {
                         newitem = new BasketItem() { Cart = cart, Product = product, ProductId = productid, Quantity = quantity, NetPrice = product.Price * quantity };
@@ -131,13 +127,24 @@ namespace BookVerse.Areas.Customer.Controllers
                 {
 
                     TempData["error"] = e.Message;
+                    return new JsonResult(TempData);
                 }
                 cart.BasketItems.AddRange(cart2.BasketItems);
                 cart.ItemCount += cart2.ItemCount;
                 cart.GrandTotalPrice += cart2.GrandTotalPrice;
                 _context.Carts.Update(cart);
                 _context.SaveChanges();
+
+                if (directbuy == false)
+                {
                 TempData["success"] = $"Item Added To Cart ";
+
+                }
+                if (directbuy == true)
+                {
+                    
+                    return Json(new { url = "/Customer/Cart" });
+                }
             }
 
             return new JsonResult(TempData);

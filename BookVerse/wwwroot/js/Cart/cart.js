@@ -3,17 +3,30 @@
 var jQueryScript = document.createElement('script');
 jQueryScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js');
 document.head.appendChild(jQueryScript);
-$("#addtocart").click(function () {
+
+
+
+// add to cart 
+$('#addtocart, #Buy').click(function () {
+    
+let pid = document.querySelector("#productid").value;
+let pquantity = document.querySelector('#quantity').value;
     const url = '/Customer/Cart/AddToCart';
-    let pid = document.querySelector("#productid").value;
-    let pquantity = document.querySelector('#quantity').value;
+    let dbuy;
+    if (this.id == 'addtocart') {
+        dbuy = null;
+    }
+    else if (this.id == 'Buy') {
+        dbuy = true;
+    }
 
     $.ajax({
         type: "POST",
         url: url,
         data: {
             productid: parseInt(pid),
-            quantity: parseInt(pquantity)
+            quantity: parseInt(pquantity),
+            directbuy:dbuy
         },
         // The expected data type of the response
         success: function (response) {
@@ -25,6 +38,10 @@ $("#addtocart").click(function () {
 
                 toastr.error(response["error"]);
             }
+            if (response['url']) {
+                
+                window.location.href = response['url'];
+            }
         },
         error: function (xhr, status, error) {
             //console.log("Error: " + error.toString());
@@ -35,5 +52,14 @@ $("#addtocart").click(function () {
             }
         }
     });
-});
+
+   
+
+}
+);
+
+//or direct buy
+
+
+
 
