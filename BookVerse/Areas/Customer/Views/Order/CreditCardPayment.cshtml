@@ -2,29 +2,38 @@
 
 <h2>credit card </h2>
 
-<form asp-action="PaymentConfirm">
-    <div>
-    <label for="CardID" class="form-label" >Card Number</label>
-    <input type="number" class="form-control" id="CardID" />
+<div class="container p-sm-5 mt-5  d-flex justify-content-center align-items-center ">
+    <div class="shadow p-4 border border-tertiary">
+        <h4>Payment Details</h4>
+        <form action="PaymentConfirm" method="post">
+            <div class="mb-3 row">
 
-    </div>
-    <div>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control pe-5" id="" placeholder="Card number">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <div class="col-sm-12">
+                    <input type="text" class="form-control pe-5" id="" placeholder="Full Name">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <div class="col-sm-6">
+                    <input type="month" min="2023-01" class="form-control" id="inputPassword" placeholder="Expire">
+                </div>
+                <div class="col-sm-6">
+                    <input type="number" minlength="3" maxlength="3" class="form-control" id="inputPassword"
+                           placeholder="Expire">
+                </div>
+            </div>
+            <input type="number" name="checkoutId" value="@ViewData["checkoutID"]" hidden />
+            <input type="text" class="form-control" value="Creditcard" name="PaymentOption" hidden />
+            <div class="mb-3 row">
+                <div class="col-sm-12">
+                    <input type="submit" class="form-control btn btn-info" id="" value="Pay">
+                </div>
+            </div>
 
-    <label for="Month" class="form-label" >Month</label>
-    <input type="number" class="form-control" id="Month" />
+        </form>
     </div>
-    <div>
-
-    <label for="Year" class="form-label" >Year</label>
-    <input type="number" class="form-control" id="Year" />
-    </div>
-    <div>
-
-    <label for="CVV" class="form-label" >CVV</label>
-    <input type="number" class="form-control" id="CVV" />
-    </div>
-    
-    <input type="number" name="checkoutId" value="@ViewData["checkoutID"]" hidden/>
-    <input type="text" class="form-control" value="Creditcard"  name="PaymentOption"hidden />
-    <input type="submit" value="PayNow" />
-</form>
+</div>

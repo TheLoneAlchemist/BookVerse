@@ -1,12 +1,18 @@
 ﻿
 @model CartVM
 
+<style>
+    .p-img{
+        height:100px;
+        
+    }
+</style>
 
 <table class="table table-bordered text-center">
     <thead>
         <tr>
+            <th>Product</th>
             <th>Product Name</th>
-            <th>List Price</th>
             <th>Product Price</th>
             <th>Quantity</th>
             <th>Net Price</th>
@@ -14,7 +20,7 @@
         </tr>
 
     </thead>
-    <tbody>
+    <tbody class="text-center">
         @if (Model is null)
         {
             <tr>
@@ -26,12 +32,13 @@
             foreach (var item in Model.BasketItems)
             {
                 <tr>
-                    <td>@item.Product.Title</td>
                     <td>
-                        <span class="text-decoration-line-through">
-                            @item.Product.ListPrice
-                        </span>
+                        <div class="p-2 m-0">
+                        <img src="@item.Product.Image" class="w-100 rounded p-img">
+
+                        </div>
                     </td>
+                    <td>@item.Product.Title</td>
                     <td>@item.Product.Price</td>
                     <td>@item.Quantity</td>
                     <td>@item.NetPrice</td>
@@ -49,3 +56,6 @@
         </tr>
     </tfoot>
 </table>
+
+
+

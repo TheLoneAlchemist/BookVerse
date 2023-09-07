@@ -54,7 +54,7 @@
                             <p class="m-0 p-0">@Model.Title</p>
                         </div>
                         <div class="col-12">
-                            <p class="m-0 p-0 price-pro">@Model.ListPrice.ToString("c")</p>
+                            <div class="m-0 p-0 price-pro"> <span class="fs-3"> @Model.Price.ToString("c") </span> <span class="text-opacity-25 text-body-tertiary text-decoration-line-through">@Model.ListPrice.ToString("c") </span> </div>
                             <hr class="p-0 m-0">
                         </div>
                         <div class="col-12 pt-2">
@@ -68,7 +68,7 @@
                             <p class="tag-section"><strong>Author : </strong>@Model.Author</p>
                         </div>
                         <div class="col-lg-12">
-                            <p>Catgory: @Model.Author</p>
+                            <p>Catgory: @Model.Category</p>
                         </div>
                         <div class="col-lg-12">
                             <input hidden value="@Model.Id" id="productid" />

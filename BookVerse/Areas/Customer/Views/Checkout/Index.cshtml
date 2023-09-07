@@ -15,13 +15,13 @@
             <form asp-action="Index">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row gap-3">
-                    <div class="col-6 col-sm-6">
+                    <div class=" col-sm-6">
                         <div class="p3 mb-3 fs-4"><span>Shipping Address</span></div>
 
                         <div class="form-group">
                             <label asp-for="Checkout.FirstName" class="form-label"></label>
                             <input asp-for="Checkout.FirstName" class="form-control" />
-                            <span asp-validation-for="Checkout" class="text-danger"></span>
+                            <span asp-validation-for="Checkout.FirstName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Checkout.LastName" class="form-label"></label>
@@ -41,13 +41,13 @@
                         </div>
                         <div class="row">
 
-                            <div class="form-group col-6">
+                            <div class="form-group  col-sm-6">
                                 <label asp-for="Address.City" class="form-label"></label>
                                 <input asp-for="Address.City" class="form-control" />
                                 <span asp-validation-for="Address.City" class="text-danger"></span>
 
                             </div>
-                                <div class="form-group col-6">
+                                <div class="form-group  col-sm-6">
                                     <label asp-for="Address.State" class="form-label"></label>
                                     <input asp-for="Address.State" class="form-control" />
                                     <span asp-validation-for="Address.State" class="text-danger"></span>
@@ -69,9 +69,9 @@
 
                     </div>
 
-                    <div class="col-4 col-sm-5">
+                    <div class=" col-sm-5">
 
-                        <div class="p-3 mb-2 fs-4"><span>Cart - - - </span><span class="text-success">Address - - - </span><span>Payment</span> </div>
+                        <div class="p-3 mb-2 fs-5 fw-semibold"><span>Cart - - - </span><span class="text-success">Address - - - </span><span>Payment</span> </div>
                         <div class="form-group">
                             <label asp-for="Checkout.ShippingPrice" class="form-label"></label>
                             <input asp-for="Checkout.ShippingPrice" class="form-control" readonly />
@@ -90,11 +90,11 @@
 
                 </div>
 
-                <div class="row mt-3">
-                    <div class="col-6 d-grid col-sm-6">
+                <div class="row g-3 mt-3">
+                    <div class=" d-grid col-sm-6">
                         <button class="btn btn-success ">Save Address</button>
                     </div>
-                    <div class="col-4 d-grid col-sm-5">
+                    <div class=" d-grid col-sm-5">
                         <button type="submit" class="btn btn-danger">Payment</button>
 
                     </div>
@@ -105,7 +105,7 @@
 </div>
 
 <div>
-    <a asp-action="/Customer/Cart">Back To Cart</a>
+    <a asp-action="/Customer/Cart" class="btn btn-warning">Back To Cart</a>
 </div>
 
 @section Scripts {
