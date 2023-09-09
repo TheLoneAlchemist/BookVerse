@@ -33,6 +33,7 @@ namespace BookVerse.Controllers
 
         //Creating Category
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public IActionResult Create(Category category)
         {
             if(int.TryParse(category.Name, out _) || float.TryParse(category.Name,out _))
@@ -80,6 +81,7 @@ namespace BookVerse.Controllers
 
 
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public IActionResult Edit(Category category)
         {
             if(category == null)
