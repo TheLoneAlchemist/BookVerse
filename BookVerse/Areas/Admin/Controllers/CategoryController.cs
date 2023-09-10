@@ -124,6 +124,7 @@ namespace BookVerse.Controllers
         }
 
         [HttpPost,ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteCategory(int? id)
         {
             if(id == null)

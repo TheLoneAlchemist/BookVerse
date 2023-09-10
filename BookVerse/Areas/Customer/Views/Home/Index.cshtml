@@ -17,7 +17,7 @@
 </style>
 
 
-
+@* Product carousel *@
 <div class="container">
 
 
@@ -83,7 +83,10 @@
             <div class="row p-2">
                 <div class="col-12 p-1">
                     <div class="card border-0 p-3 shadow  border-top border-5 rounded">
+                        <a asp-area="Customer" asp-action="ProductDetails" asp-route-id="@product.Id">
+
                         <img src="@product.Image" class="img-thumbnail rounded" />
+                        </a>
                         <div class="card-body pb-0">
                             <div class="pl-1">
                                 <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@product.Title</p>
