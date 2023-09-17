@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product> 
+﻿@model IEnumerable<Product>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -11,7 +11,7 @@
 
     .c-img {
         height: 100%;
-        object-fit:fill;
+        object-fit: fill;
         filter: brightness(0.6);
     }
 </style>
@@ -30,37 +30,37 @@
         </div>
 
         <div class="carousel-inner">
-            @if(Model != null)
+            @if (Model != null)
             {
-                
-            <div class="carousel-item active c-item">
-                <a asp-action="ProductDetails" asp-route-id="@Model.FirstOrDefault().Id">
+
+                <div class="carousel-item active c-item">
+                    <a asp-action="ProductDetails" asp-route-id="@Model.FirstOrDefault().Id">
                         <img src="@Model.FirstOrDefault().Image" class="d-block w-100 c-img" alt="Slide 1">
-                <div class="carousel-caption top-0 mt-4">
-                    <p class="mt-5 fs-3 text-uppercase">@Model.FirstOrDefault().Author Presents</p>
-                    <h1 class="display-1 fw-bolder text-capitalize">The Aurora Tours</h1>
-                    
+                        <div class="carousel-caption top-0 mt-4">
+                            <p class="mt-5 fs-3 text-uppercase">@Model.FirstOrDefault().Author Presents</p>
+                            <h1 class="display-1 fw-bolder text-capitalize">The Aurora Tours</h1>
+
+                        </div>
+                    </a>
                 </div>
-                </a>
-            </div>
             }
-        @foreach(var product in Model.Skip(1).Take(2))
-        
-        {
-            <div class="carousel-item c-item">
-              <a asp-action="ProductDetails" asp-route-id="@product.Id">
-                <img src="@product.Image"class="d-block w-100 c-img" alt="Slide 1">
-                <div class="carousel-caption top-0 mt-4">
-                    <p class="mt-5 fs-3 text-uppercase">@product.Author Presents </p>
-                    <h1 class="display-1 fw-bolder text-capitalize">@product.Title</h1>
-                    
+            @foreach (var product in Model.Skip(1).Take(2))
+
+            {
+                <div class="carousel-item c-item">
+                    <a asp-action="ProductDetails" asp-route-id="@product.Id">
+                        <img src="@product.Image" class="d-block w-100 c-img" alt="Slide 1">
+                        <div class="carousel-caption top-0 mt-4">
+                            <p class="mt-5 fs-3 text-uppercase">@product.Author Presents </p>
+                            <h1 class="display-1 fw-bolder text-capitalize">@product.Title</h1>
+
+                        </div>
+                    </a>
                 </div>
-            </a>
-            </div>
-        }
-        
+            }
+
         </div>
-            
+
         <button class="carousel-control-prev text-dark p-1" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
             <span class="bi bi-caret-left-square-fill" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -76,54 +76,73 @@
 @* products showcase *@
 
 <div class="container-fluid m-4  text-nowrap">
-<div class="row pb-3">
-    @foreach (var product in Model)
-    {
-        <div class="col-lg-3 col-sm-6">
-            <div class="row p-2">
-                <div class="col-12 p-1">
-                    <div class="card border-0 p-3 shadow  border-top border-5 rounded">
-                        <a asp-area="Customer" asp-action="ProductDetails" asp-route-id="@product.Id">
+    <div class="row pb-3">
+        @foreach (var product in Model)
+        {
+            <div class="col-lg-3 col-sm-6">
+                <div class="row p-2">
+                    <div class="col-12 p-1">
+                        <div class="card border-0 p-3 shadow  border-top border-5 rounded">
+                            <a asp-area="Customer" asp-action="ProductDetails" asp-route-id="@product.Id">
 
-                        <img src="@product.Image" class="img-thumbnail rounded" />
-                        </a>
-                        <div class="card-body pb-0">
-                            <div class="pl-1">
-                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@product.Title</p>
-                                <p class="card-title text-warning text-center">by <b>@product.Author</b></p>
-                            </div>
-                            <div class="pl-1">
-                                <p class="text-dark text-opacity-75 text-center mb-0">
-                                    List Price:
-                                    <span class="text-decoration-line-through text-opacity-25 text-body-tertiary">
-                                        @product.ListPrice.ToString("c")
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="pl-1">
-                                <p class="text-dark text-opacity-75 text-center">
-                                    As low as:
-
-
-                                    <span class="fw-bold">
-                                        @product.Price.ToString("c")
-                                    </span>
-
-
-                                </p>
-                            </div>
-                        </div>
-                        <div>
-                            <a asp-action="ProductDetails"
-                               asp-route-id="@product.Id"
-                               class="btn btn-primary bg-gradient border-0 form-control">
-                                Details
+                                <img src="@product.Image" class="img-thumbnail rounded" />
                             </a>
+                            <div class="card-body pb-0">
+                                <div class="pl-1">
+                                    <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@product.Title</p>
+                                    <p class="card-title text-warning text-center">by <b>@product.Author</b></p>
+                                </div>
+                                <div class="pl-1">
+                                    <p class="text-dark text-opacity-75 text-center mb-0">
+                                        List Price:
+                                        <span class="text-decoration-line-through text-opacity-25 text-body-tertiary">
+                                            @product.ListPrice.ToString("c")
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="pl-1">
+                                    <p class="text-dark text-opacity-75 text-center">
+                                        As low as:
+
+
+                                        <span class="fw-bold">
+                                            @product.Price.ToString("c")
+                                        </span>
+
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex justify-content-center align-items-center text-center">
+                                @* <a asp-action="ProductDetails"
+                            asp-route-id="@product.Id"
+                            class="btn btn-primary bg-gradient border-0 form-control">
+                            Details
+                            </a> *@
+                                <div class="col btn btn-outline-info btn-sm w-100" id="addtocart">
+                                    <input type="number" hidden value="1" id="quantity">
+
+                                    <input hidden value="@product.Id" class="addtowish" id="productid" />
+                                    Add To Cart
+                                </div>
+                                
+                                <button value="@product.Id" class="addtowish btn btn-outline-light btn-sm col w-100 text-info">
+                                    <span class="bi bi-heart-fill text-info"></span>
+                                    WishList
+                                </button>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
-</div>
+
+
+@section  Scripts
+    {
+    <script src="~/js/wishbucket/AddToWishBucket.js"></script>
+    <script src="~/js/Cart/cart.js"></script>
+}

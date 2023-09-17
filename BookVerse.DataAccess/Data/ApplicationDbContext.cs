@@ -25,6 +25,8 @@ namespace BookVerse.DataAccess.Data
         public DbSet<OrderedItem> OrderedItems { get; set; }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<WishList> WishLists { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

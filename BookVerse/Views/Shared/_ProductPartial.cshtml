@@ -1,0 +1,15 @@
+﻿@model WishList
+
+
+<div class="card" style="width: 15rem; box-shadow: rgba(79, 188, 235, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; ">
+    <div class="card-body ">
+        <a asp-area="Customer" asp-controller="Home" asp-action="ProductDetails" asp-route-id="@Model.Product.Id">
+
+            <img src="@Model.Product.Image" asp-append-version="true" class=" card-img" alt="...">
+        </a>
+        <p class="card-text ">@Model.Product.Title</p>
+    </div>
+
+    <a asp-area="Customer" asp-controller="WishList" asp-action="Delete" asp-route-wid="@Model.Id" class="bi bi-x btn btn-danger opacity-25">
+    </a>
+</div>

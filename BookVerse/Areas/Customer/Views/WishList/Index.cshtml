@@ -1,0 +1,20 @@
+﻿@model IEnumerable<WishList>;
+
+@{
+    ViewData["Title"] = "WishBucket";
+}
+
+<h2 class="text-center">Wish Bucket</h2>
+<hr />
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+             <div class="col-md">
+                 <partial name="_ProductPartial" model="item">
+            </div>
+        }
+    </div>
+</div>
