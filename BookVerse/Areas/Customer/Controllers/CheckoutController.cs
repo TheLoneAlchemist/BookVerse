@@ -36,6 +36,7 @@ namespace BookVerse.Areas.Customer.Controllers
                 return Redirect("/Customer/Home");
             }
 
+
             CheckoutVM checkoutVM = new CheckoutVM();
 
             checkoutVM.Cart = cart;

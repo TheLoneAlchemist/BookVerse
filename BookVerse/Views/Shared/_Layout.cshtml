@@ -55,22 +55,35 @@
                         }
                         else if (User.IsInRole(AppRole.User.ToString()))
                         {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle link-dark link-opacity-50 link-offset-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Accounts
-                            </a>
+@*                           <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle link-dark link-opacity-50 link-offset-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Accounts
+                              </a>
 
-                            <ul class="dropdown-menu">
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="Customer" asp-controller="Cart" asp-action="Index">Cart</a>
-                                </li>
-                                <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Customer" asp-controller="Order" asp-action="MyOrders">My Orders</a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                            </ul>
+                              <ul class="dropdown-menu">
+                                  <li class="nav-item">
+                                      <a class="dropdown-item" asp-area="Customer" asp-controller="Cart" asp-action="Index">Cart</a>
+                                  </li>
+                                  <li class="nav-item">
+                                          <a class="dropdown-item" asp-area="Customer" asp-controller="Order" asp-action="MyOrders">My Orders</a>
+                                  </li>
+                                  <li><hr class="dropdown-divider"></li>
+                              </ul>
 
+                          </li>
+ *@
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index"><span class="bi bi-cart text-info "></span></a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Customer" asp-controller="WishList" asp-action="Index"><span class="bi bi-heart-fill text-danger "></span></a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Customer" asp-controller="Order" asp-action="MyOrders"><span class="bi bi-bag-fill text-success"  ></span></a>
+                        </li>
+
+
                         }
 
                     </ul>
