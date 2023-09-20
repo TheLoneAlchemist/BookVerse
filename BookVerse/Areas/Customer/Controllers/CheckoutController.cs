@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
 namespace BookVerse.Areas.Customer.Controllers
 {
@@ -63,6 +64,11 @@ namespace BookVerse.Areas.Customer.Controllers
             {
                 try
                 {
+                    ////storing address on session
+                    //var AddressSessioned = JsonConvert.SerializeObject(checkoutVM.Address);
+                    //_httpContextAccessor.HttpContext.Session.SetString("AddressSession", AddressSessioned);
+
+
                     await _context.Addresses.AddAsync(checkoutVM.Address);
                     await _context.SaveChangesAsync();
                     var address = await _context.Addresses.Where(p => p.UserId == userId).FirstOrDefaultAsync();
@@ -71,6 +77,8 @@ namespace BookVerse.Areas.Customer.Controllers
                     {
                         checkoutVM.Checkout.AddressId = address.Id;
                         checkoutVM.Checkout.CartId = cart.Id;
+
+
                         await _context.Checkouts.AddAsync(checkoutVM.Checkout);
                         await _context.SaveChangesAsync();
                         var checkout = await _context.Checkouts.Where(c => c.CartId == cart.Id).FirstOrDefaultAsync();
